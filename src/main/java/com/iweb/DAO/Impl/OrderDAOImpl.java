@@ -20,7 +20,7 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public List<Orders> getAllOrders() throws SQLException {
         List<Orders> orders = new ArrayList<>();
-        String sql = "SELECT * FROM orders";
+        String sql = "SELECT * FROM orders" ;
         try (Connection c = DBPool.getConnection();
              PreparedStatement statement = c.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
