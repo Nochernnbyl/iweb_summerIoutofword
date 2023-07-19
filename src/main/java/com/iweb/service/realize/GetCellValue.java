@@ -42,6 +42,8 @@ public class GetCellValue {
                 return (int)cell.getNumericCellValue();
             }else if (judgeHeadName(headName) instanceof  String){
                 return cell.getStringCellValue();
+            }else if (judgeHeadName(headName)instanceof Double){
+                return cell.getNumericCellValue();
             }else {
                 return null;
             }
@@ -61,7 +63,7 @@ public class GetCellValue {
         }else if (headname.equals("属性编号")){
             return 1;
         }else if (headname.equals("商品价格")){
-            return 1;
+            return (double)1;
         }else {
             return null;
         }
