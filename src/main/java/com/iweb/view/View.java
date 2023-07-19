@@ -79,7 +79,7 @@ public class View {
         System.out.println("请选择你要的功能");
         System.out.println("1.查看商品   2.退出登录   ");
         if ("1".equals(sc.nextLine())) {
-            ProductDAO productDAO = (ProductDAO) new ProductDAOImpl();
+            ProductDAO productDAO = new ProductDAOImpl();
             Product product = new Product();
             product.setProductId(1);
             try {
@@ -116,7 +116,7 @@ public class View {
         System.out.println("请选择你要的功能");
         System.out.println("1.查看商品     2.查看订单     3.退出登录   ");
         if ("1".equals(sc.nextLine())) {
-            ProductDAO productDAO = (ProductDAO) new ProductDAOImpl();
+            ProductDAO productDAO = new ProductDAOImpl();
             try {
                 productDAO.getAllProducts();
             } catch (SQLException e) {
@@ -129,6 +129,8 @@ public class View {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }else if("3".equals(sc.nextLine())){
+            normalFunction();
         }
     }
 
