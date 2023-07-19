@@ -76,7 +76,7 @@ public class View {
      */
     public void normalFunction() {
 
-        System.out.println("请选择你要的功能");
+        System.out.println("请选择你要的功能 ");
         System.out.println("1.查看商品   2.退出登录   ");
         if ("1".equals(sc.nextLine())) {
             ProductDAO productDAO = new ProductDAOImpl();
