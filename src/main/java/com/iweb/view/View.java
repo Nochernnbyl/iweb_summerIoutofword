@@ -114,7 +114,6 @@ public class View {
             System.out.println("用户名或密码输入错误");
             loginView();
         }
-
     }
 
     /**
@@ -135,7 +134,6 @@ public class View {
             mainView();
         }
     }
-
 
     /**
      * 注册页面

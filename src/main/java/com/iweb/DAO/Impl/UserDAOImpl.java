@@ -19,7 +19,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void insert(String name,String password,String phoneNumber,String address) throws Exception {
 
-        String sql = "INSERT INTO USER (uname,upassword,umoney,phoneNumber,address) VALUES (?,?,0,?,?)\n";
+        String sql = "INSERT INTO USER (username,PASSWORD,account,phone_number,address) VALUES (?,?,0,?,?)";
         try(
                 Connection c = DBPool.getConnection();
                 PreparedStatement ps =c.prepareStatement(sql)
@@ -48,11 +48,12 @@ public class UserDAOImpl implements UserDAO {
             ResultSet rs =ps.executeQuery();
             while (rs.next()){
             User user =  new User();
-            user.setId(rs.getInt(1));
-            user.setName(rs.getString(2));
-            user.setPassword(rs.getString(3));
-            user.setPhoneNumber(rs.getString(4));
-            user.setAddress(rs.getString(5));
+            user.setId(rs.getInt("userid"));
+            user.setName(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
+            user.setPhoneNumber(rs.getString("phone_number"));
+            user.setAddress(rs.getString("address"));
+            user.setAccount(rs.getInt("account"));
             users.add(user);
             }
         }catch (Exception e ){
