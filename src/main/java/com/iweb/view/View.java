@@ -6,19 +6,22 @@ import com.iweb.DAO.Impl.ProductDAOImpl;
 import com.iweb.DAO.OrderDAO;
 import com.iweb.DAO.ProductDAO;
 import com.iweb.pojo.Product;
+import com.iweb.pojo.User;
+import com.iweb.service.TopUp;
+import com.iweb.service.realize.TopUpImpl;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 
 
 public class View {
-
-    Scanner sc = new Scanner(System.in);
+    static   User currentUser  = new User();
+    static Scanner sc = new Scanner(System.in);
 
     /**
      * 主页面
      */
-    public void mainView(){
+    public static void mainView(){
         System.out.println("请选择你要的业务");
         System.out.println("1.登录     2.注册");
         if ("1".equals(sc.nextLine())){
@@ -37,7 +40,7 @@ public class View {
     /**
      * 用户选择登录界面
      */
-    public void loginView(){
+    public static void loginView(){
         System.out.println("欢迎来到登录界面");
         System.out.println("1.用户登录      2.管理员登录");
         if ("1".equals(sc.nextLine())){
@@ -55,12 +58,12 @@ public class View {
     /**
      * 普通用户登录界面
      */
-    public void normalLogin(){
+    public static void normalLogin(){
         System.out.println("请输入你的账号");
         String inputUsername = sc.nextLine();
         System.out.println("输入你的密码");
         String inputPassword = sc.nextLine();
-        if (Controller.normalLogin(inputUsername,inputPassword)){
+        if ((currentUser=Controller.normalLogin(inputUsername,inputPassword))!=null){
 //            跳转用户登录成功的功能页面
             System.out.println("登录成功");
             normalFunction();
@@ -74,26 +77,31 @@ public class View {
     /**
      * 普通用户登录成功的功能选择页面
      */
-    public void normalFunction() {
-
+    public static void normalFunction() {
         System.out.println("请选择你要的功能 ");
-        System.out.println("1.查看商品   2.退出登录   ");
+        System.out.println("1.查看商品  2.查看购物车  3.用户充值   4.退出登录   ");
         if ("1".equals(sc.nextLine())) {
-            ProductDAO productDAO = new ProductDAOImpl();
-            Product product = new Product();
-            product.setProductId(1);
-            try {
-                productDAO.getAllProducts();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+//           这里跳转到查看商品功能控制
+            System.out.println("这里跳转到查看商品功能控制");
+            Controller.showProduct();
+        }else if ("2".equals(sc.nextLine())){
+//            这里跳转查看购物车功能控制
+            System.out.println("这里跳转查看购物车功能控制");
+            Controller.showCart();
+        }else if ("3".equals(sc.nextLine())){
+//            这里跳转用户充值界面
+            System.out.println("正在跳转用户充值界面");
+            Controller.topup(currentUser);
+        }else if ("4".equals(sc.nextLine())){
+            mainView();
         }else {
+            System.out.println("输入有误，请重试");
             normalFunction();
         }
 
     }
 
-    public void administratorLogin(){
+    public static void administratorLogin(){
         System.out.println("请输入你的账号");
         String inputUsername = sc.nextLine();
         System.out.println("输入你的密码");
@@ -112,25 +120,19 @@ public class View {
     /**
      * 管理员登陆成功的功能页面
      */
-    public void administratorFunction(){
+    public static void administratorFunction(){
         System.out.println("请选择你要的功能");
         System.out.println("1.查看商品     2.查看订单     3.退出登录   ");
         if ("1".equals(sc.nextLine())) {
-            ProductDAO productDAO = new ProductDAOImpl();
-            try {
-                productDAO.getAllProducts();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+//            这里也是调用Controller的查看商品功能
+            System.out.println("这里也是调用Controller的查看商品功能");
+            Controller.showProduct();
         }else if("2".equals(sc.nextLine())){
-            OrderDAO orderDAO=new OrderDAOImpl();
-            try {
-                orderDAO.getAllOrders();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+//           这里调用Controller的查看订单功能
+            System.out.println("这里调用Controller的查看订单功能");
+            Controller.showOrder();
         }else if("3".equals(sc.nextLine())){
-            normalFunction();
+            mainView();
         }
     }
 
@@ -138,7 +140,7 @@ public class View {
     /**
      * 注册页面
      */
-    public void registerView(){
+    public static void registerView(){
         System.out.println("请输入你要注册的用户名");
         String inputName = sc.nextLine();
         System.out.println("请输入你的密码");
@@ -164,4 +166,7 @@ public class View {
             System.out.println("注册失败");
         }
     }
+
+
+
 }
