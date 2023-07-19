@@ -4,11 +4,7 @@ import com.iweb.pojo.User;
 
 import java.util.Collection;
 
-/**
- * @author ASUS
- * @Date 2023/7/17 16:41
- * @Version 1.8
- */
+
 public interface UserDAO {
 
     /**
@@ -21,7 +17,7 @@ public interface UserDAO {
      */
      Collection<User> selectAll();
 
-
+    void uppdate(User user , int money) throws Exception;
 
 
 

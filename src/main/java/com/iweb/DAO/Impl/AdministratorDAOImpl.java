@@ -11,11 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * @author ASUS
- * @Date 2023/7/18 10:07
- * @Version 1.8
- */
+
 public class AdministratorDAOImpl implements AdministratorDAO {
 
     /**

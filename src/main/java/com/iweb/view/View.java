@@ -1,15 +1,17 @@
 package com.iweb.view;
 
 import com.iweb.Controller.Controller;
+import com.iweb.DAO.Impl.OrderDAOImpl;
+import com.iweb.DAO.Impl.ProductDAOImpl;
+import com.iweb.DAO.OrderDAO;
+import com.iweb.DAO.ProductDAO;
+import com.iweb.pojo.Product;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
-/**
- * @author ASUS
- * @Date 2023/7/17 16:44
- * @Version 1.8
- */
-public class MainView {
+
+public class View {
 
     Scanner sc = new Scanner(System.in);
 
@@ -26,7 +28,7 @@ public class MainView {
 //            选择注册，跳转注册页面
             registerView();
         }else {
-            System.out.println("输入有误，重新选择");
+            System.out.println("错误输入，重新开始,提出到主页面");
             mainView();
         }
 
@@ -39,13 +41,14 @@ public class MainView {
         System.out.println("欢迎来到登录界面");
         System.out.println("1.用户登录      2.管理员登录");
         if ("1".equals(sc.nextLine())){
-//           跳转之普通用户登录界面
+//           跳转之普通用户
+//           登录界面
             normalLogin();
         }else if ("2".equals(sc.nextLine())){
 //            跳转至管理员登录页面
             administratorLogin();
         }else {
-            System.out.println("输入有误，请重新输入");
+            System.out.println("错误输入，重新开始");
         }
     }
 
@@ -63,7 +66,7 @@ public class MainView {
             normalFunction();
         }else {
 //            登录失败跳转用户登录页面
-            System.out.println("用户名或密码输入错误");
+            System.out.println("用户名或密码输入错误，重新开始登录");
             loginView();
         }
     }
@@ -71,9 +74,23 @@ public class MainView {
     /**
      * 普通用户登录成功的功能选择页面
      */
-    public void normalFunction(){
+    public void normalFunction() {
+
         System.out.println("请选择你要的功能");
         System.out.println("1.查看商品   2.退出登录   ");
+        if ("1".equals(sc.nextLine())) {
+            ProductDAO productDAO = (ProductDAO) new ProductDAOImpl();
+            Product product = new Product();
+            product.setProductId(1);
+            try {
+                productDAO.getAllProducts();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else {
+            normalFunction();
+        }
+
     }
 
     public void administratorLogin(){
@@ -98,6 +115,21 @@ public class MainView {
     public void administratorFunction(){
         System.out.println("请选择你要的功能");
         System.out.println("1.查看商品     2.查看订单     3.退出登录   ");
+        if ("1".equals(sc.nextLine())) {
+            ProductDAO productDAO = (ProductDAO) new ProductDAOImpl();
+            try {
+                productDAO.getAllProducts();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else if("2".equals(sc.nextLine())){
+            OrderDAO orderDAO=new OrderDAOImpl();
+            try {
+                orderDAO.getAllOrders();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
@@ -114,11 +146,11 @@ public class MainView {
         try{
             Long.parseLong(phoneNumber);
         }catch (Exception e ){
-            System.out.println("你的电话号码输入有问题，请重新尝试");
+            System.out.println("你的电话号码输入有问题，注册失败");
             registerView();
         }
         if (phoneNumber.length()!=11){
-            System.out.println("你的电话号码格式有问题，请重新输入");
+            System.out.println("你的电话号码格式有问题，注册失败");
             registerView();
         }
         System.out.println("请输入你的地址");
@@ -127,7 +159,7 @@ public class MainView {
             System.out.println("注册成功，你可以登录了");
             loginView();
         }else {
-            System.out.println("注册失败，用户名重复，请重新输入");
+            System.out.println("注册失败");
         }
     }
 }

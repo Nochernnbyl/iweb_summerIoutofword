@@ -1,15 +1,11 @@
 package com.iweb;
 
-import com.iweb.view.MainView;
+import com.iweb.view.View;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
+
+public class App {
     public static void main( String[] args )
     {
-        new MainView().mainView();
+        new View().mainView();
     }
 }

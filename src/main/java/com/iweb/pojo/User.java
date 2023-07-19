@@ -1,13 +1,12 @@
 package com.iweb.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-/**
- * @author ASUS
- * @Date 2023/7/18 8:42
- * @Version 1.8
- */
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     private int id;
@@ -15,6 +14,7 @@ public class User {
     private String password;
     private String phoneNumber;
     private String address;
+    private int account;
 
 
 

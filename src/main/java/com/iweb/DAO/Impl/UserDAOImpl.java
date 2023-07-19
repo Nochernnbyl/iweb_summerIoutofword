@@ -11,11 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * @author ASUS
- * @Date 2023/7/17 16:41
- * @Version 1.8
- */
+
 public class UserDAOImpl implements UserDAO {
     /**
      * 插入数据，注册时使用
@@ -63,5 +59,20 @@ public class UserDAOImpl implements UserDAO {
             e.printStackTrace();
         }
         return (users.isEmpty()?null:users);
+    }
+
+     @Override
+    public void uppdate(User user, int money) throws Exception {
+        String sql = "UPDATE USER SET account = ? WHERE userid = ?\n";
+        try (Connection c = DBPool.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql);) {
+            ps.setInt(1,user.getAccount()+money);
+            ps.setInt(2,user.getId());
+            ps.execute();
+        } catch (Exception e) {
+            throw  new Exception();
+        }
+
+
     }
 }

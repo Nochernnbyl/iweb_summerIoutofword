@@ -4,34 +4,26 @@ import com.alibaba.druid.pool.DruidDataSourceFactory;
 
 import javax.sql.DataSource;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Properties;
 
-/**
- * @author ASUS
- * @Date 2023/7/17 22:32
- * @Version 1.8
- */
+
 public class DBPool {
-
-    /**获取连接池
-     * @return  通过封装在DBPool的方法，可以通过方法返回一个连接
-     */
-    public static Connection getConnection(){
-        Properties properties = new Properties();
-
+    private static final String USER_NAME = "root";
+    private static final String PASSWORD = "123456";
+    //ip地址 端口 访问数据库 请求参数(配置信息)
+    private static final String URL =
+            "jdbc:mysql://localhost:3306/test?characterEncoding=utf8";
+    static{
         try {
-            properties.load(new FileInputStream("D:\\idea_workspace\\d0717_javaFoundation_maven\\src\\main\\java\\com\\iweb\\ruid.properties"));
-            DataSource dataSource = DruidDataSourceFactory.createDataSource(properties);
-            return dataSource.getConnection();
-        } catch (Exception e) {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        return null;
-
+    }
+    public static Connection getConnection() throws Exception{
+        return DriverManager.getConnection(URL,USER_NAME,PASSWORD);
     }
 
 

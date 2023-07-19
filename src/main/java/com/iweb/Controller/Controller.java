@@ -7,17 +7,12 @@ import com.iweb.pojo.User;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author ASUS
- * @Date 2023/7/17 18:51
- * @Version 1.8
- */
+
 public class Controller {
 
     /**普通用户登录控制
      * @param username  用户名
      * @param password 用户密码
-     * @param return 返回一个布尔值，在控制端中进行与数据库用户比对，返回用户是否登陆成功
      */
     public static boolean normalLogin(String username,String password){
         List<User> users = (List<User>) new UserDAOImpl().selectAll();
