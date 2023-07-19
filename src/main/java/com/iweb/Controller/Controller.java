@@ -16,6 +16,9 @@ public class Controller {
 
     static Scanner sc = new Scanner(System.in);
 
+
+
+
     /**普通用户登录控制
      * @param username  用户名
      * @param password 用户密码

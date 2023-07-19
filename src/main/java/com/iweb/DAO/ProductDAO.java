@@ -19,4 +19,10 @@ public interface ProductDAO {
     void updateProduct(Product product) throws SQLException;
 
     void deleteProduct(int productId) throws SQLException;
+
+
+    /**  导入商品
+     * @param list 从excel中获得的Product集合
+     */
+    void insertAll(List<Product> list) throws Exception;
 }

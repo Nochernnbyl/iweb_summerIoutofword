@@ -103,4 +103,30 @@ public class ProductDAOImpl implements ProductDAO {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * 导入商品
+     *
+     * @param list 从excel中获得的Product集合
+     */
+    @Override
+    public void insertAll(List<Product> list) throws Exception {
+        String sql = "INSERT INTO product (productName,reviews,statsID,productPrice) VALUES (?,?,?,?)";
+        for (Product p : list) {
+            try (
+                    Connection c = DBPool.getConnection();
+                    PreparedStatement ps = c.prepareStatement(sql);
+            ) {
+                ps.setString(1,p.getProductName() );
+                ps.setInt(2,p.getReviews());
+                ps.setInt(3,p.getStatsId());
+                ps.setDouble(4,p.getProductPrice());
+                ps.execute();
+            } catch (Exception e) {
+                throw new Exception();
+            }
+
+        }
+    }
 }

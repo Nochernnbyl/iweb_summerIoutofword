@@ -7,9 +7,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="iweb_summerIoutofword" />
-        <module name="d0718_javafun_view" />
         <module name="iweb0718_javafundation_view" />
+        <module name="d0718_javafun_view" />
+        <module name="iweb_summerIoutofword" />
       </profile>
     </annotationProcessing>
   </component>

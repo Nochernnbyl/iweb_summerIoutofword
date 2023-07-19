@@ -8,8 +8,11 @@ import com.iweb.DAO.ProductDAO;
 import com.iweb.pojo.Product;
 import com.iweb.pojo.User;
 import com.iweb.service.TopUp;
+import com.iweb.service.realize.ImportProExcelImpl;
 import com.iweb.service.realize.TopUpImpl;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -22,6 +25,12 @@ public class View {
      * 主页面
      */
     public static void mainView(){
+        System.out.println("正在加载后台资源");
+        if (new ImportProExcelImpl().productImport(new File("D:\\idea_workspace\\_0718_javaFundationGroupExcel_maven\\123.xlsx"), XSSFWorkbook.class)){
+            System.out.println("资源加载完成");
+        }else {
+            System.out.println("资源加载失败");
+        }
         System.out.println("请选择你要的业务");
         System.out.println("1.登录     2.注册");
         if ("1".equals(sc.nextLine())){
