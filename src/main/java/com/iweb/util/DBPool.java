@@ -1,6 +1,5 @@
 package com.iweb.util;
 
-import com.alibaba.druid.pool.DruidDataSourceFactory;
 
 import javax.sql.DataSource;
 import java.io.FileInputStream;
